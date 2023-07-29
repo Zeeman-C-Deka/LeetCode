@@ -1,0 +1,19 @@
+class Solution {
+    public int peakIndexInMountainArray(int[] arr) {
+        if(arr.length == 3){
+            return 1;
+        }
+        int st = 1, en = arr.length-2; 
+        while(st < en){
+            if(arr[st] > arr[st-1] && arr[st] > arr[st+1]){
+                return st;
+            }else if(arr[en] > arr[en-1] && arr[en] > arr[en+1]){
+                return en;
+            }else{
+                st++;
+                en--;
+            }
+        }
+        return 1;
+    }
+}
