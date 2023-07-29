@@ -1,0 +1,53 @@
+class Solution {
+    public long maxRunTime(int n, int[] bat) {
+        if(n == bat.length){
+            long min = Integer.MAX_VALUE;
+            for(int b : bat){
+                if(min > b)
+                    min = b;
+            }
+            return min;
+        }
+        Arrays.sort(bat);
+        long sum = 0, min = 0;
+        for(int b : bat)
+            sum += b;
+        
+        int k = 0, nb = bat.length;
+        while(bat[nb-1-k] > sum/(n-k)){
+            sum -= bat[nb-1-k++];
+        }
+
+        return sum/(n-k);
+        // min = sum/n;
+        // int m = 0;
+        // for(int i = 0; i < bat.length; i++){
+        //     if(bat[i] < min){
+        //         m += bat[i];
+        //     }
+        //     if(m >= min){
+        //         m = 0;
+
+        //     }
+                
+        // }
+
+        // if(m < min)
+        //     min = m;
+
+        // return min;
+        // long sum = 0, rem = 0;
+        // boolean t = true;
+        // int c = bat[0];
+        // for(int b : bat){
+        //     rem += b%n;
+        //     sum += b/n;
+        //     if(c != b)
+        //         t = false;
+        // }
+        // if(t)
+        //     sum += rem/n;
+
+        // return sum;
+    }
+}
