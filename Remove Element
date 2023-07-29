@@ -1,0 +1,23 @@
+class Solution {
+    public int removeElement(int[] nums, int val) {
+        if(nums.length == 0){
+            return 0;
+        }
+        int st = 0, en = nums.length-1;
+        int count = 0;
+        while(st < en){
+            if(nums[st] == val){
+                nums[st] = nums[en];
+                en--;
+                count++;
+            }else{
+                st++;
+            }
+        }
+        if(nums[st] == val){
+            count++;
+        }
+        
+        return nums.length-count;
+    }
+}
