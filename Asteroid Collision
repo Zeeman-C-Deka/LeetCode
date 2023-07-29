@@ -1,0 +1,24 @@
+class Solution {
+    public int[] asteroidCollision(int[] asteroids) {
+        LinkedList<Integer> al = new LinkedList<>();
+        for(int i = 0; i < asteroids.length; i++){
+            if(al.isEmpty() || asteroids[i] > 0 || al.peekLast() < 0){
+                al.addLast(asteroids[i]);
+            }else{
+                while(!al.isEmpty() && al.peekLast() > 0 && al.peekLast() < asteroids[i]*(-1)){
+                    al.removeLast();
+                }
+                if(al.isEmpty() || al.peekLast() < 0){
+                    al.addLast(asteroids[i]);
+                }else if(al.peekLast() > asteroids[i]*(-1)){
+                    continue;
+                }else{
+                    al.removeLast();
+                    continue;
+                }
+            }
+        }
+        return al.stream().mapToInt(i->i).toArray();
+
+    }
+}
