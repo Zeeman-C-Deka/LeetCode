@@ -1,0 +1,21 @@
+class Solution {
+    public int hIndex(int[] cit) {
+        // HashMap<Integer, Integer> f =  new HashMap<>();
+        int n = cit.length;
+        int b[] = new int[n+1];
+        for(int c : cit){
+            if(c >= n)
+                b[n]++;
+            else
+                b[c]++;
+        }
+        int count = 0;
+        for(int i = n; i >= 0; i--){
+            count += b[i];
+            if(count >= i)
+                return i;
+        }
+        return 0;
+
+    }
+}
