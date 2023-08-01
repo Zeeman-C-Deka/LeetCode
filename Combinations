@@ -1,0 +1,21 @@
+class Solution {
+    List<List<Integer>> list;
+    void fun(int i,int n, int k, List<Integer> l) {
+        if(k==0) {
+            list.add(new ArrayList(l));
+            return;
+        }
+        if(i>n) return;
+        else {
+            fun(i+1,n,k,l);
+            l.add(i);
+            fun(i+1,n,k-1,l);
+            l.remove(l.size()-1);
+        }
+    }
+    public List<List<Integer>> combine(int n, int k) {
+        list  = new ArrayList<List<Integer>>();
+        fun(1,n,k,new ArrayList<Integer>());
+        return list;
+    }
+}
