@@ -1,0 +1,26 @@
+class Solution {
+    List<String> list;
+    String a[] = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+
+    public void perm(String d, int i, List<Character> ar){
+        if(i == d.length()){
+            list.add(ar.stream().map(String::valueOf).collect(Collectors.joining()));
+            return;
+        }else{
+            int num = d.charAt(i) - '0';
+            String cur = a[num];
+            for(int j = 0; j < cur.length(); j++){
+                ar.add(cur.charAt(j));
+                perm(d, i+1, ar);
+                ar.remove(ar.size()-1);
+            }
+            return;
+        }
+    }
+    public List<String> letterCombinations(String digits) {
+        list = new ArrayList<>();
+        if(digits == null || digits.length() == 0) return list;
+        perm(digits, 0, new ArrayList<Character>());
+        return list;
+    }
+}
