@@ -1,0 +1,27 @@
+class Solution {
+    public String convert(String s, int numRows) {
+        if(s.length() <= numRows || numRows == 1) return s;
+        HashMap<Integer, StringBuilder> h = new HashMap<>();
+        for(int k = 0; k < numRows; k++){
+            h.put(k, new StringBuilder());
+        }
+        h.get(0).append(s.charAt(0));
+        int i = 1;
+        int j;
+        while(i < s.length()){
+            for(j = 1; j < numRows && i < s.length(); j++){
+                h.get(j).append(s.charAt(i));
+                i++;
+            }
+            for(j = numRows-2; j >= 0 && i < s.length(); j--){
+                h.get(j).append(s.charAt(i));
+                i++;
+            }
+        }
+        StringBuilder r =  new StringBuilder();
+        for(int k = 0; k < numRows; k++){
+            r.append(h.get(k));
+        }
+        return r.toString();
+    }
+}
