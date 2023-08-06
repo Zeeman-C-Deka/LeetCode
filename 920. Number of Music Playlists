@@ -1,0 +1,37 @@
+class Solution {
+    // List<List<Integer>> list;
+    // void perm(int n, int g, int k, List<Integer> a){
+
+    // }
+    public int numMusicPlaylists(int n, int g, int k) {
+        // list = new ArrayList<List<Integer>>();
+        // int p = 1;
+        // int q = 1;
+        // int t = 0;
+        // for(int i = 1; i <= g; i++){
+        //     p *= (n-t);
+        //     if(t < k) t++;
+        // }
+        // // if(g == n) return p%(1000000007);
+        // t = 0;
+        // for(int i = 1; i <= g; i++){
+        //     q *= (n-1-t);
+        //     if(t < k) t++;
+        // }
+        // p = p - (q*n);
+
+        // return p%(1000000007);
+        int m = (int)Math.pow(10, 9) + 7;
+        long dp[][] = new long[g+1][n+1];
+        dp[0][0] = 1;
+        for(int i = 1; i <= g; i++){
+            for(int j = 1; j <= n; j++){
+                dp[i][j] = (dp[i-1][j-1]*(n-(j-1)))%m;
+                if(j > k){
+                    dp[i][j] = (dp[i][j] + (dp[i-1][j]*(j-k))%m)%m;
+                }
+            }
+        }
+        return (int)dp[g][n];
+    }
+}
