@@ -1,0 +1,23 @@
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        if(s.length() == 0) return 0;
+        int j = 0;
+        int c = 0;
+        LinkedList<Character> l = new LinkedList<>();
+        while(j < s.length()){
+            // if(s.charAt(j) == ' '){
+            //     j++;
+            //     continue;
+            // }
+            if(l.contains(s.charAt(j))){
+                c = Math.max(c, l.size());
+                l.removeFirst();
+            }else{
+                l.add(s.charAt(j));
+                j++;
+            }
+        }
+        c = Math.max(c, l.size());
+        return c;
+    }
+}
