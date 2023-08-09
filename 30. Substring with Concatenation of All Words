@@ -1,0 +1,55 @@
+class Solution {
+    public List<Integer> findSubstring(String s, String[] w) {
+        final List<Integer> l = new ArrayList<>();
+        final Map<String, Integer> ar = new HashMap<>();
+        for(final String wo : w){
+            ar.put(wo, ar.getOrDefault(wo, 0)+1);
+        }
+        final int n = s.length(), m = w.length, nw = w[0].length();
+        for(int i = 0; i < n-m*nw+1; i++){
+            final Map<String, Integer> co = new HashMap<>();
+            int j = 0;
+            while(j < m){
+                final String ww = s.substring(i+j*nw, i+(j+1)*nw);
+                if(ar.containsKey(ww)){
+                    co.put(ww, co.getOrDefault(ww, 0)+1);
+                    if(co.get(ww) > ar.getOrDefault(ww, 0)) break;
+                }else{
+                    break;
+                }
+                j++;
+            }
+            if(j == m){
+                l.add(i);
+            }
+        }
+        return l;
+        // List<String> ls = new ArrayList<>();
+        // if(w[0].length() == 1 && s.length() == w.length){
+        //     l.add(0);
+        //     return l;
+        // }
+        // boolean t;
+        // int j = (w.length*w[0].length());
+        // int i = 0;
+        // while(j <= s.length()){
+        //     t = true;
+        //     for(int k = 0; k < w.length*w[0].length(); k += w[0].length()){
+        //         ls.add(s.substring(i,j).substring(k, k+w[0].length()));
+        //     }
+        //     for(int k = 0; k < w.length; k++){
+        //         if(ls.contains(w[k])){
+        //             ls.remove(w[k]);
+        //         }else{
+        //             t = false;
+        //             break;
+        //         }
+        //     }
+        //     ls.clear();
+        //     if(t) l.add(i);
+        //     i++;
+        //     j++;
+        // }
+        // return l;
+    }
+}
