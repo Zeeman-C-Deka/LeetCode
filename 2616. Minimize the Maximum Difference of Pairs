@@ -1,0 +1,43 @@
+class Solution {
+    public int minimizeMax(int[] nums, int p) {
+        // if(p == 0) return 0;
+        // if(nums.length == 1) return nums[0];
+        // PriorityQueue<Integer> q = new PriorityQueue<>();
+        // Arrays.sort(nums);
+        // int sum;
+        // boolean t = true;
+        // for(int i = 0; i < nums.length-1; i++){
+        //     sum = nums[i+1]-nums[i];
+        //     if(t && i > 0 && sum == nums[i]-nums[i-1]){
+        //         t = false;
+        //         continue;
+        //     } 
+        //     if(sum < 0) sum = -sum;
+        //     q.add(sum);
+        //     t = true;
+        // }
+        // for(int i = 0; i < p-1; i++){
+        //     q.poll();
+        // }
+        // return q.poll();
+        Arrays.sort(nums);
+        int n = nums.length;
+        int lt = 0;
+        int rt = nums[n-1]-nums[0];
+        while(lt < rt){
+            int mid = (lt+rt)/2, k = 0;
+            for(int i = 1; i < n && k < p; i++){
+                if(nums[i] - nums[i-1] <= mid){
+                    k++;
+                    i++;
+                }
+            }
+            if(k >= p){
+                rt = mid;
+            }else{
+                lt = mid+1;
+            }
+        }
+        return lt;
+    }
+}
