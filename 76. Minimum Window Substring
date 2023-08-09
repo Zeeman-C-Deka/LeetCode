@@ -1,0 +1,99 @@
+class Solution {
+    public String minWindow(String s, String t) {
+        if(s.length() < t.length()) return "";
+        // int m = s.length(), n = t.length();
+        // int c = 1;
+        // int i = 0, j = n;
+        // boolean z;
+        // while(c <= (m-n)+1){
+        //     String ss = s.substring(i, j);
+        //     z = false;
+        //     for(int k = 0; k < n; k++){
+        //         if(ss.contains(t.substring(k,k+1))){
+        //             if(k == n-1) z = true;
+        //         }else{
+        //             break;
+        //         }
+        //     }
+        //     if(z) return ss;
+        //     if(j == m){
+        //         i = 0;
+        //         j = n+c;
+        //         c++;
+        //         continue;
+        //     }
+        //     i++;
+        //     j++;
+        // }
+        // return "";
+        Map<Character, Integer> ar = new HashMap<>();
+        int m = s.length(), n = t.length();
+        for(int i = 0; i < n; i++){
+            ar.put(t.charAt(i), ar.getOrDefault(t.charAt(i), 0)+1);
+        }
+
+        int i = 0, j = 0;
+        int c = n, minS = 0, minL = Integer.MAX_VALUE;
+        while(j < m){
+            char jc = s.charAt(j);
+            if(ar.containsKey(jc)){
+                int count = ar.get(jc);
+                if(count > 0){
+                    c--;
+                }
+                ar.put(jc, count-1);
+            }
+            j++;
+
+            while(c == 0){
+                if(minL > j-i){
+                    minL = j-i;
+                    minS = i;
+                }
+                char ic = s.charAt(i);
+                if(ar.containsKey(ic)){
+                    int count = ar.get(ic);
+                    if(count == 0){
+                        c++;
+                    }
+                    ar.put(ic, count+1);
+                }
+                i++;
+            }
+        }
+        return minL == Integer.MAX_VALUE ? "" : s.substring(minS, minS + minL);
+        // Map<Character, Integer> co = new HashMap<>();
+        // for(int i = 0; i < m; i++){
+        //     co.put(s.charAt(i), co.getOrDefault(s.charAt(i), 0)+1);
+        // }
+        // int i = 0, j = m-1;
+        // boolean ti = false, tj = false;
+        // while(i < j){
+        //     if(!ar.containsKey(s.charAt(i))){
+        //         co.remove(s.charAt(i));
+        //         i++;
+        //     }else{
+        //         if(co.get(s.charAt(i)) > ar.get(s.charAt(i))){
+        //             co.put(s.charAt(i), co.get(s.charAt(i))-1);
+        //             i++;
+        //         }else{
+        //             ti = true;
+        //         }
+        //     }
+        //     if(!ar.containsKey(s.charAt(j))){
+        //         co.remove(s.charAt(j));
+        //         j--;
+        //     }else{
+        //         if(co.get(s.charAt(j)) > ar.get(s.charAt(j))){
+        //             co.put(s.charAt(j), co.get(s.charAt(j))-1);
+        //             j--;
+        //         }else{
+        //             tj = true;
+        //         }
+        //     }
+        //     if(ti && tj) break;
+        // }
+        // if(i > j) return "";
+        // return s.substring(i, j+1);
+    }
+}
