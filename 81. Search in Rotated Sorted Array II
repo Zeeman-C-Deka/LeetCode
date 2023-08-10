@@ -1,0 +1,33 @@
+class Solution {
+    public boolean search(int[] n, int t) {
+        int i = 0;
+        int j = n.length-1;
+        while(i < j){
+            int mid = (i+j)/2;
+            if(n[mid] == t || n[i] == t || n[j] == t) return true;
+            if(n[i] == n[mid]){
+                i++;
+                continue;
+            }
+            if(n[j] == n[mid]){
+                j--;
+                continue;
+            }
+            if(n[i] < n[mid]){
+                if(n[i] < t && n[mid] > t){
+                    j = mid-1;
+                }else{
+                    i = mid+1;
+                }
+            }else{
+                if(n[j] > t && n[mid] < t){
+                    i = mid+1;
+                }else{
+                    j = mid-1;
+                }
+            }
+        }
+        if(n[i] == t || n[j] == t) return true;
+        return false;
+    }
+}
