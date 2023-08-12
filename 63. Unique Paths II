@@ -1,0 +1,35 @@
+class Solution {
+    // int count = 0;
+    // void perm(int i, int j, int[][] oG){
+    //     // if(i < oG.length && j < oG[0].length && oG[i][j] == 1) return;
+    //     if(i == oG.length-1 && j == oG[0].length-1){
+    //         if(oG[i][j] == 1) return;
+    //         count++;
+    //         return;
+    //     }
+    //     if(i < oG.length && j < oG[0].length){
+    //         if(oG[i][j] == 1) return;
+    //         perm(i+1, j, oG);
+    //         perm(i, j+1, oG);
+    //     }
+
+    // }
+    public int uniquePathsWithObstacles(int[][] oG) {
+        int m = oG.length;
+        int n = oG[0].length;
+        // perm(0, 0, oG);
+        // return count;
+        int dp[] = new int[n];
+        dp[0] = 1;
+        for(int i = 0; i < m; i++){
+            for(int j = 0; j < n; j++){
+                if(oG[i][j] == 1){
+                    dp[j] = 0;
+                }else if(j > 0){
+                    dp[j] += dp[j-1];
+                }
+            }
+        }
+        return dp[n-1];
+    }
+}
