@@ -1,0 +1,39 @@
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        List<List<String>> list = new LinkedList<List<String>>();
+        if(strs.length == 1){
+            List<String> l = new LinkedList<String>();
+            l.add(strs[0]);
+            list.add(l);
+            return list;
+        }
+
+        Map<String, List<String>> m = new HashMap<>();
+        for(String s : strs){
+            char c[] = s.toCharArray();
+            Arrays.sort(c);
+            String key = String.valueOf(c);
+            if(!m.containsKey(key)) m.put(key, new LinkedList<>());
+            m.get(key).add(s);
+        }
+        return new LinkedList<>(m.values());
+        // List<Map<Character, Integer>> lm = new LinkedList<>();
+        // for(int i = 0; i < strs.length; i++){
+        //     Map<Character, Integer> m = new HashMap<>();
+        //     for(int j = 0; j < strs[i].length(); j++){
+        //         m.put(strs[i].charAt(j), m.getOrDefault(strs[i].charAt(j), 0)+1);
+        //     }
+        //     if(lm.contains(m)){
+        //         //list.set(lm.indexOf(m), (list.get(lm.indexOf(m))).add(strs[i]));
+        //         list.get(lm.indexOf(m)).add(strs[i]);
+        //     }else{
+        //         lm.add(m);
+        //         List<String> l = new LinkedList<String>();
+        //         l.add(strs[i]);
+        //         list.add(l);
+        //     }
+        // }
+        // return list;
+
+    }
+}
