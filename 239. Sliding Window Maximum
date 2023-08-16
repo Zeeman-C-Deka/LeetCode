@@ -1,0 +1,33 @@
+class Solution {
+    public int[] maxSlidingWindow(int[] n, int k) {
+        if(n.length == 1) return n;
+
+        LinkedList<Integer> l = new LinkedList<>();
+        // PriorityQueue<Integer> pq = new PriorityQueue<Integer>(Collections.reverseOrder());
+        int i = 0, j = 0;
+        // for( ; j < k; j++){
+        //     pq.add(n[j]);
+        // }
+        // if(n.length == k){
+        //     int a[] = new int[1];
+        //     a[0] = pq.peek();
+        //     return a;
+        // }
+        int a[] = new int[n.length+1-k];
+        // a[0] = pq.peek();
+        while(j < n.length){
+            while(!l.isEmpty() && l.peek() < j-k+1){
+                l.poll();
+            }
+            while(!l.isEmpty() && n[l.peekLast()] < n[j]){
+                l.pollLast();
+            }
+            l.add(j);
+            if(j >= k-1){
+                a[i++] = n[l.peek()];
+            }
+            j++;
+        }
+        return a;
+    }
+}
