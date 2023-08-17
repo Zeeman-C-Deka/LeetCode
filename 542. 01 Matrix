@@ -1,0 +1,26 @@
+class Solution {
+    int dir[] = {0, 1, 0, -1, 0};
+    public int[][] updateMatrix(int[][] mat) {
+        int m = mat.length;
+        int n = mat[0].length;
+        if(m == 1 && n == 1) return mat;
+        Queue<int[]> q = new ArrayDeque<>();
+        for(int i = 0; i < m; i++){
+            for(int j = 0; j < n; j++){
+                if(mat[i][j] == 0) q.offer(new int[]{i, j});
+                else mat[i][j] = -1;
+            }
+        }
+        while(!q.isEmpty()){
+            int c[] = q.poll();
+            int i = c[0], j = c[1];
+            for(int k = 0; k < 4; k++){
+                int ni = i+dir[k], nj = j+dir[k+1];
+                if(ni < 0 || ni == m || nj < 0 || nj == n || mat[ni][nj] != -1) continue;
+                mat[ni][nj] = mat[i][j]+1;
+                q.offer(new int[]{ni, nj});
+            } 
+        }
+        return mat;
+    }
+}
