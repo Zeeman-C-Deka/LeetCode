@@ -1,0 +1,37 @@
+class Solution {
+    public int maximalNetworkRank(int n, int[][] r) {
+        Map<Integer, Integer> m = new HashMap<>();
+        Map<Integer, List<Integer>> l = new HashMap<>();
+        for(int i = 0; i < r.length; i++){
+            m.put(r[i][0], m.getOrDefault(r[i][0], 0)+1);
+            m.put(r[i][1], m.getOrDefault(r[i][1], 0)+1);
+            if(l.containsKey(r[i][0])){
+                l.get(r[i][0]).add(r[i][1]);
+            }else{
+                l.put(r[i][0], new LinkedList<>());
+                l.get(r[i][0]).add(r[i][1]);
+            }
+            if(l.containsKey(r[i][1])){
+                l.get(r[i][1]).add(r[i][0]);
+            }else{
+                l.put(r[i][1], new LinkedList<>());
+                l.get(r[i][1]).add(r[i][0]);
+            }
+            //l.put(r[i][0], l.getOrDefault(r[i][0], new ArrayList<>()).add(r[i][1]));
+            //l.put(r[i][1], l.getOrDefault(r[i][1], new ArrayList<>()).add(r[i][0]));
+        }
+        int max = 0, max1 = 0;
+        for(int i = 0; i < n-1; i++){
+            for(int j = i+1; j < n; j++){
+                if(m.containsKey(i) && m.containsKey(j)){
+                    max1 = m.get(i)+m.get(j);
+                    if(l.containsKey(i)){
+                        if(l.get(i).contains(j)) max1--;
+                    }
+                    max = Math.max(max, max1);
+                }
+            }
+        }
+        return max;
+    }
+}
