@@ -1,0 +1,47 @@
+class Solution {
+    public int[][] insert(int[][] is, int[] ni) {
+        List<int[]> l = new LinkedList<>();
+        int n = is.length;
+        if(n == 0){
+            l.add(ni);
+            return l.toArray(new int[l.size()][]);
+        }
+        boolean t = true;
+        int a[] = new int[2];
+        if(is[0][0] >= ni[0]){
+            a = ni;
+            l.add(a);
+            t = false;
+        }else{
+            a = is[0];
+            l.add(a);
+        }
+        for(int i = 0; i < n; i++){
+            if(t && a[1] < ni[0] && is[i][0] >= ni[1]){
+                t = false;
+                a = ni;
+                l.add(a);
+                i--;
+            }else if(t && a[1] >= ni[0]){
+                t = false;
+                a[1] = Math.max(a[1], ni[1]);
+                a[0] = Math.min(a[0], ni[0]);
+                i--;
+            }else if(a[1] >= is[i][0]){
+                a[1] = Math.max(a[1], is[i][1]);
+            }else{
+                a = is[i];
+                l.add(a);
+            }
+        }
+        if(t){
+            if(a[1] >= ni[0]){
+                a[1] = Math.max(a[1], ni[1]);
+                a[0] = Math.min(a[0], ni[0]);
+            }else{
+                l.add(ni);
+            }
+        }
+        return l.toArray(new int[l.size()][]);
+    }
+}
