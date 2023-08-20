@@ -1,0 +1,13 @@
+class Solution {
+    public String simplifyPath(String p) {
+        Deque<String> s = new LinkedList<>();
+        Set<String> skip = new HashSet<>(Arrays.asList("..",".",""));
+        for (String dir : p.split("/")) {
+            if (dir.equals("..") && !s.isEmpty()) s.pop();
+            else if (!skip.contains(dir)) s.push(dir);
+        }
+        String res = "";
+        for (String dir : s) res = "/" + dir + res;
+        return res.isEmpty() ? "/" : res;
+    }
+}
