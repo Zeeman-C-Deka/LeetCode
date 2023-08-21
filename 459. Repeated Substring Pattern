@@ -1,0 +1,20 @@
+class Solution {
+    public boolean repeatedSubstringPattern(String s) {
+        boolean t = false;
+        for(int i = s.length()/2; i > 0; i--){
+            String c = s.substring(0, i);
+            StringBuilder a = new StringBuilder();
+            a.append(c);
+            while(a.length() < s.length()){
+                a.append(c);
+            }
+            if(a.length() == s.length()){
+                if(s.equals(a.toString())){
+                    t = true;
+                    break;
+                }
+            }
+        }
+        return t;
+    }
+}
