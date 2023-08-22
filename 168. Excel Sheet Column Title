@@ -1,0 +1,15 @@
+class Solution {
+    public String convertToTitle(int c) {
+        String x = "";
+        c--;
+        while(c >= 0){
+            x = (char)('A' + (c%26)) + x;
+            c /= 26;
+            c--;
+        }
+        // String x;
+        // if(rem == 0) x = ""+ (char)(--c + 'A');
+        // else x = ""+ (char)(--rem + 'A') +""+ (char)(--c + 'A');
+        return x;
+    }
+}
