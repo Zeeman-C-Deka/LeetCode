@@ -1,0 +1,24 @@
+class Solution {
+    public int evalRPN(String[] t) {
+        LinkedList<Integer> l = new LinkedList<>();
+        int a;
+        for(int i = 0; i < t.length; i++){
+            if(t[i].equals("+")){
+                a = l.poll();
+                l.addFirst(l.poll() + a);
+            }else if(t[i].equals("-")){
+                a = l.poll();
+                l.addFirst(l.poll() - a);
+            }else if(t[i].equals("*")){
+                a = l.poll();
+                l.addFirst(l.poll() * a);
+            }else if(t[i].equals("/")){
+                a = l.poll();
+                l.addFirst(l.poll() / a);
+            }else{
+                l.addFirst(Integer.parseInt(t[i]));
+            }
+        }
+        return l.poll();
+    }
+}
