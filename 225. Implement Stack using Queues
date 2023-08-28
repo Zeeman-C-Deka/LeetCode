@@ -1,0 +1,32 @@
+class MyStack {
+    LinkedList<Integer> l;
+
+    public MyStack() {
+        l = new LinkedList<Integer>();
+    }
+    
+    public void push(int x) {
+        l.add(x);
+    }
+    
+    public int pop() {
+        return l.pollLast();
+    }
+    
+    public int top() {
+        return l.peekLast();
+    }
+    
+    public boolean empty() {
+        return l.isEmpty();
+    }
+}
+
+/**
+ * Your MyStack object will be instantiated and called as such:
+ * MyStack obj = new MyStack();
+ * obj.push(x);
+ * int param_2 = obj.pop();
+ * int param_3 = obj.top();
+ * boolean param_4 = obj.empty();
+ */
