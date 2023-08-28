@@ -1,5 +1,5 @@
 class MyStack {
-    LinkedList<Integer> l;
+    Queue<Integer> l;
 
     public MyStack() {
         l = new LinkedList<Integer>();
@@ -7,14 +7,17 @@ class MyStack {
     
     public void push(int x) {
         l.add(x);
+        for(int i = 1; i < l.size(); i++){
+            l.add(l.remove());
+        }
     }
     
     public int pop() {
-        return l.pollLast();
+        return l.remove();
     }
     
     public int top() {
-        return l.peekLast();
+        return l.peek();
     }
     
     public boolean empty() {
