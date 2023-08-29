@@ -1,0 +1,39 @@
+class Solution {
+    public int bestClosingTime(String c) {
+        // int sum = 0; 
+        // for(int i = 0; i < c.length(); i++){
+        //     if(c.charAt(i) == 'Y'){
+        //         sum++;
+        //     }
+        // }
+        // int r = 0;
+        // int min = sum;
+        // for(int i = 1; i <= c.length(); i++){
+        //     if(c.charAt(i-1) == 'Y'){
+        //         sum--;
+        //     }else{
+        //         sum++;
+        //     }
+        //     if(min > sum){
+        //         min = sum;
+        //         r = i;
+        //     }
+        // }
+        // return r;
+        int sum = 0; 
+        int r = 0;
+        int max = sum;
+        for(int i = 1; i <= c.length(); i++){
+            if(c.charAt(i-1) == 'Y'){
+                sum++;
+            }else{
+                sum--;
+            }
+            if(sum > max){
+                max = sum;
+                r = i;
+            }
+        }
+        return r;
+    }
+}
