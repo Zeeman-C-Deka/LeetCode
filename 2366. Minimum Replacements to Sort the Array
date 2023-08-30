@@ -1,0 +1,59 @@
+class Solution {
+    public long minimumReplacement(int[] num) {
+        long r = 0;
+        int p = num[num.length-1];
+        for(int i = num.length-2; i >= 0; i--){
+            int n = num[i]/p;
+            if(num[i]%p != 0){
+                n++;
+                p = num[i]/n;
+            }
+            r += n-1;
+        }
+        // List<Integer> a = new LinkedList<>(); 
+        // for(int n : num)
+        //     a.add(n);
+        
+        // for(int i = num.length-2; i >= 0; i--){
+        //     if(a.get(i) > a.get(i+1)){
+        //         if(a.get(i)%2 == 0){
+        //             int n = (a.get(i)/2);
+        //             if(n > a.get(i+1)){
+        //                 n = a.get(i) - a.get(i+1);
+        //                 a.remove(i);
+        //                 a.add(i, a.get(i));
+        //                 a.add(i, n);
+        //                 i++;
+        //                 r++;
+        //                 continue;
+        //             }else{
+        //                 a.remove(i);
+        //                 a.add(i, n);
+        //                 a.add(i, n);
+        //                 r++;
+        //                 continue;
+        //             }
+        //         }else{
+        //             int n = (a.get(i)/2) + 1;
+        //             if(n > a.get(i+1)){
+        //                 n = a.get(i) - a.get(i+1);
+        //                 a.remove(i);
+        //                 a.add(i, a.get(i));
+        //                 a.add(i, n);
+        //                 i++;
+        //                 r++;
+        //                 continue;
+        //             }else{
+        //                 a.remove(i);
+        //                 a.add(i, n);
+        //                 a.add(i, n-1);
+        //                 r++;
+        //                 continue;
+        //             }
+        //         }
+        //     }
+        // }
+        // System.out.print(a);
+        return r;
+    }
+}
