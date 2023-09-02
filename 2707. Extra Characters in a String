@@ -1,0 +1,35 @@
+class Solution {
+    // int min;
+    // public void perm(String s, String[] d){
+    //     for(int i = 0; i < d.length; i++){
+    //         if(s.contains(d[i])){
+    //             String t = s;
+    //             t = t.replace(d[i], "-");
+    //             //System.out.println(t);
+    //             String t1 = t.replace("-", "");
+    //             min = Math.min(min, t1.length());
+    //             if(min == 0) return;
+    //             perm(t, d);            
+    //         }
+    //     }
+    //     return;
+    // }
+    public int minExtraChar(String s, String[] d) {
+        int n = s.length() + 1; 
+        int dp[] = new int[n];
+        Arrays.fill(dp, n);
+        dp[0] = 0;
+
+        Set<String> ds = new HashSet<>(Arrays.asList(d));
+
+        for(int i = 1; i <= n-1; i++){
+            dp[i] = dp[i-1]+1;
+            for(int j = 1; j <= i; j++){
+                if(ds.contains(s.substring(i-j, i))){
+                    dp[i] = Math.min(dp[i], dp[i-j]);
+                }
+            }
+        }
+        return dp[n-1];
+    }
+}
