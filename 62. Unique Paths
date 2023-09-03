@@ -1,0 +1,32 @@
+class Solution {
+    // int M, N;
+    // int c = 0;
+    // void perm(int i, int j){
+    //     if(i == M && j == N){
+    //         c++;
+    //         return;
+    //     }
+    //     if(i < M) perm(i+1, j);
+    //     if(j < N) perm(i, j+1);
+    //     return;
+    // }
+    public int uniquePaths(int m, int n) {
+        // M = m-1;
+        // N = n-1;
+        // perm(0, 0);
+        // return c;
+        int dp[][] = new int[m][n];
+        for(int i = 0; i < m; i++){
+            dp[i][0] = 1;
+        }
+        for(int i = 0; i < n; i++){
+            dp[0][i] = 1;
+        }
+        for(int i = 1; i < m; i++){
+            for(int j = 1; j < n; j++){
+                dp[i][j] = dp[i-1][j] + dp[i][j-1];
+            }
+        }
+        return dp[m-1][n-1];
+    }
+}
