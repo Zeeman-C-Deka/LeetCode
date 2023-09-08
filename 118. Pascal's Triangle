@@ -1,0 +1,17 @@
+class Solution {
+    public List<List<Integer>> generate(int n) {
+        LinkedList<List<Integer>> L = new LinkedList<>();
+        L.add(new LinkedList<>());
+        L.getLast().add(1);
+        for(int i = 1; i < n; i++){
+            LinkedList<Integer> l = new LinkedList<>();
+            l.add(1);
+            for(int j = 1; j < i; j++){
+                l.add(L.getLast().get(j-1) + L.getLast().get(j));
+            }
+            l.add(1);
+            L.add(l);
+        }
+        return L;
+    }
+}
