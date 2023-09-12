@@ -1,0 +1,18 @@
+class Solution {
+    public int minDeletions(String s) {
+        if(s.length() == 1) return 0;
+        int ch[] = new int[26];
+        int c = 0;
+        Set<Integer> l = new HashSet<>();
+        for(int i = 0; i < s.length(); i++){
+            ++ch[s.charAt(i) - 'a'];
+        }
+        for(int i = 0; i < 26; i++){
+            while(ch[i] > 0 && !l.add(ch[i])){
+                ch[i]--;
+                c++;
+            }
+        }
+        return c;
+    }
+}
