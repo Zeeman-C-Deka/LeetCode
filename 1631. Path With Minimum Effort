@@ -1,0 +1,31 @@
+class Solution {
+    public int minimumEffortPath(int[][] h) {
+        int dir[] = {0, 1, 0, -1, 0};
+        int m = h.length, n = h[0].length;
+        int dis[][] = new int[m][n];
+        for(int i = 0; i < m; i++) Arrays.fill(dis[i], Integer.MAX_VALUE);
+
+        PriorityQueue<int[]> minHeap = new PriorityQueue<>(Comparator.comparingInt(a -> a[0]));
+        minHeap.offer(new int[]{0,0,0});
+        dis[0][0] = 0;
+
+        while(!minHeap.isEmpty()){
+            int t[] = minHeap.poll();
+            int d = t[0], r = t[1], c = t[2];
+            if(d > dis[r][c]) continue;
+            if(r == m-1 && c == n-1) return d;
+            for(int i = 0; i < 4; i++){
+                int nr = r + dir[i], nc = c + dir[i+1];
+                if(nr >= 0 && nr < m && nc >= 0 && nc < n){
+                    int nd = Math.max(d, Math.abs(h[nr][nc] - h[r][c]));
+                    if(dis[nr][nc] > nd){
+                        dis[nr][nc] = nd;
+                        minHeap.offer(new int[]{dis[nr][nc], nr, nc});
+                    }
+                }
+                
+            }
+        }
+        return 0;
+    }
+}
