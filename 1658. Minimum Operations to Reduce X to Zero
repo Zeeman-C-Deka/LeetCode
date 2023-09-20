@@ -1,0 +1,15 @@
+class Solution {
+    public int minOperations(int[] nums, int x) {
+        int sum = 0;
+        for(int n : nums) sum += n;
+
+        int mL = -1, cS = 0;
+        for(int l = 0, r = 0; r < nums.length; r++){
+            cS += nums[r];
+            while(l <= r && cS > sum-x) cS -= nums[l++];
+            if(cS == sum-x) mL = Math.max(mL, r-l+1);
+        }
+
+        return mL == -1 ? -1 : nums.length-mL;
+    }
+}
