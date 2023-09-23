@@ -1,0 +1,21 @@
+class Solution {
+    public int longestStrChain(String[] w) {
+        int dp[] = new int[w.length];
+        int r = 1;
+        Arrays.fill(dp, 1);
+        LinkedList<String> l = new LinkedList<>();
+        Arrays.sort(w, (a, b) -> a.length() - b.length());
+        Collections.addAll(l, w);
+        for(int i = 0; i < w.length; i++){
+            for(int j = 0; j < w[i].length(); j++){
+                String a = w[i].substring(0, j) + w[i].substring(j+1);
+                if(l.contains(a)){
+                    dp[i] = Math.max(dp[i], 1+dp[l.indexOf(a)]);
+                    r = Math.max(dp[i], r);
+                }
+            }
+        }
+
+        return r;
+    }
+}
