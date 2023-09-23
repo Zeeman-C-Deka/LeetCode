@@ -1,0 +1,24 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    int perm(TreeNode t, int x){
+        if(t.left == null && t.right == null) return x;
+        return (t.left != null ? perm(t.left, x*10 + t.left.val) : 0) + (t.right != null ? perm(t.right, x*10 + t.right.val) : 0);
+    }
+    public int sumNumbers(TreeNode root) {
+        return perm(root, root.val);
+    }
+}
