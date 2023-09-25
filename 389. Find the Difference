@@ -1,0 +1,20 @@
+class Solution {
+    public char findTheDifference(String s, String t) {
+        if(s.length() == 0) return t.charAt(0);
+        Map<Character, Integer> l = new HashMap<>();
+        for(char c : s.toCharArray()){
+            l.put(c, l.getOrDefault(c, 0)+1);
+        }
+        //Collections.addAll(l, c);
+        //System.out.print(s + " " + l + " " + t);
+        for(int i = 0; i < t.length(); i++){
+            char c = t.charAt(i);
+            if(l.containsKey(c) && l.get(c) > 0){
+                l.put(c, l.get(c)-1);
+            }else{
+                return c;
+            }
+        }
+        return '0';
+    }
+}
