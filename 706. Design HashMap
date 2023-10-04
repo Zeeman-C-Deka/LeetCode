@@ -1,0 +1,46 @@
+class MyHashMap {
+    LinkedList<String> k;
+    LinkedList<String> v;
+
+    public MyHashMap() {
+        k = new LinkedList<String>();
+        v = new LinkedList<String>();
+    }
+    
+    public void put(int ke, int va) {
+        String key = String.valueOf(ke);
+        String value = String.valueOf(va);
+        if(k.contains(key)){
+            v.remove(k.indexOf(key));
+            v.add(k.indexOf(key), value);
+        }else{
+            k.add(key);
+            v.add(value);
+        }
+    }
+    
+    public int get(int ke) {
+        String key = String.valueOf(ke);
+        if(k.contains(key)){
+            return Integer.parseInt(v.get(k.indexOf(key)));
+        }else{
+            return -1;
+        }
+    }
+    
+    public void remove(int ke) {
+        String key = String.valueOf(ke);
+        if(k.contains(key)){
+            v.remove(k.indexOf(key));
+            k.remove(key);
+        }
+    }
+}
+
+/**
+ * Your MyHashMap object will be instantiated and called as such:
+ * MyHashMap obj = new MyHashMap();
+ * obj.put(key,value);
+ * int param_2 = obj.get(key);
+ * obj.remove(key);
+ */
