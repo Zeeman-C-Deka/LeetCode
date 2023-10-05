@@ -1,0 +1,21 @@
+class Solution {
+    public List<Integer> majorityElement(int[] nums) {
+        LinkedList<Integer> r = new LinkedList<Integer>();
+        if(nums.length < 3){
+            for(int n : nums){
+                if(!r.contains(n)){
+                    r.add(n);
+                }
+            }
+            return r;
+        }
+        Map<Integer, Integer> m = new HashMap<>();
+        for(int n : nums){
+            if(!r.contains(n)){
+                m.put(n, m.getOrDefault(n, 0)+1);
+                if(m.get(n) > nums.length/3) r.add(n);
+            }  
+        }
+        return r;
+    }
+}
