@@ -1,0 +1,16 @@
+class Solution {
+    public List<Integer> getRow(int r) {
+        int a[] = new int[r+1];
+        a[0] = 1;
+        for(int i = 1; i <= r; i++){
+            for(int j = i; j > 0; j--){
+                a[j] += a[j-1];
+            }
+        }
+        List<Integer> l = new LinkedList<>();
+        for(int x : a){
+            l.add(x);
+        }
+        return l;
+    }
+}
