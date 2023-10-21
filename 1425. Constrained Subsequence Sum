@@ -1,0 +1,16 @@
+class Solution {
+    public int constrainedSubsetSum(int[] n, int k) {
+        int r = n[0];
+        Deque<Integer> q = new ArrayDeque<>();
+        for(int i = 0; i < n.length; i++){
+            n[i] += !q.isEmpty() ? q.peek() : 0;
+            r = Math.max(r, n[i]);
+            while(!q.isEmpty() && n[i] > q.peekLast()){
+                q.pollLast();
+            }
+            if(n[i] > 0) q.offer(n[i]);
+            if(i >= k && !q.isEmpty() && q.peek() == n[i-k]) q.poll();
+        }
+        return r;
+    }
+}
