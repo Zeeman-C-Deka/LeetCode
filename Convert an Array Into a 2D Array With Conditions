@@ -1,0 +1,24 @@
+class Solution {
+    public List<List<Integer>> findMatrix(int[] nums) {
+        List<List<Integer>> l = new LinkedList<>();
+        List<Integer> t = new LinkedList<>();
+        for(int i = 0; i < nums.length; i++){
+            t.add(nums[i]);
+        }
+        while(t.size() > 0){
+            List<Integer> t1 = new LinkedList<>();
+            //t1.add(t.poll());
+            for(int i = 0; i < t.size(); i++){
+                if(t1.contains(t.get(i))){
+                    continue;
+                }else{
+                    t1.add(t.get(i));
+                    t.remove(i);
+                    i--;
+                }
+            }
+            l.add(t1);
+        }
+        return l;
+    }
+}
